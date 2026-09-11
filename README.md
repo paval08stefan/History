@@ -1,2 +1,2 @@
 # History
-Blob dedicat istoriei și istoriilor
+Blog dedicat istoriei și istoriilor
