@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cronici Istorice | Paval Stefan</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background: #f4efe6;
+            color: #2c241c;
+            line-height: 1.7;
+            transition: 0.3s;
+        }
+
+        /* HEADER */
+        header {
+            background:
+                linear-gradient(rgba(40, 28, 18, 0.9), rgba(40, 28, 18, 0.9)),
+                radial-gradient(circle, #8d6e4b, #2e2117);
+            color: #f7ead3;
+            padding: 25px 8%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.3);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #d7ad65;
+        }
+
+        nav a {
+            color: #f7ead3;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #d7ad65;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 20px;
+            background:
+                linear-gradient(rgba(50,35,22,0.72), rgba(50,35,22,0.78)),
+                url("https://images.unsplash.com/photo-1461360228754-6e81c478b882?auto=format&fit=crop&w=1800&q=80")
+                center/cover;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 76px);
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 8px #000;
+        }
+
+        .hero p {
+            font-size: 21px;
+            margin-bottom: 30px;
+            color: #f1dfc3;
+        }
+
+        .author {
+            font-size: 18px;
+            color: #d7ad65;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 13px 28px;
+            background: #9b6b32;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #c18a45;
+            transform: translateY(-2px);
+        }
+
+        /* GENERAL */
+        section {
+            padding: 75px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+            color: #5d3c20;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #806b55;
+        }
+
+        /* SEARCH */
+        .search-area {
+            max-width: 850px;
+            margin: 0 auto 40px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-area input,
+        .search-area select {
+            padding: 14px;
+            border: 1px solid #c9b99f;
+            border-radius: 5px;
+            background: #fffaf1;
+            font-family: inherit;
+            font-size: 16px;
+        }
+
+        .search-area input {
+            flex: 1;
+        }
+
+        /* ARTICLES */
+        .articles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .article {
+            background: #fffaf2;
+            border: 1px solid #d8c8ad;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(64, 45, 27, 0.1);
+            transition: 0.3s;
+        }
+
+        .article:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 30px rgba(64, 45, 27, 0.18);
+        }
+
+        .article-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .article-content {
+            padding: 25px;
+        }
+
+        .article-date {
+            color: #9b6b32;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .article h3 {
+            color: #50331c;
+            font-size: 25px;
+            margin: 10px 0;
+        }
+
+        .article p {
+            color: #665747;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 15px;
+            color: #8b5b2a;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* FEATURE */
+        .featured {
+            background: #34261b;
+            color: #f4e5cb;
+        }
+
+        .featured .section-title h2 {
+            color: #e4c58e;
+        }
+
+        .featured-content {
+            max-width: 1000px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .featured-content blockquote {
+            font-size: 26px;
+            font-style: italic;
+            padding: 30px;
+            border-left: 4px solid #c49350;
+            border-right: 4px solid #c49350;
+            background: rgba(255,255,255,0.03);
+        }
+
+        /* ABOUT */
+        .about {
+            max-width: 950px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .about-avatar {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #76502d;
+            color: #f7dfb4;
+            font-size: 42px;
+            font-weight: bold;
+            border: 5px solid #d1b17b;
+        }
+
+        /* TIMELINE */
+        .timeline {
+            max-width: 900px;
+            margin: auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            width: 4px;
+            background: #a77b47;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            width: 50%;
+            padding: 20px 40px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-box {
+            background: #fffaf2;
+            padding: 20px;
+            border: 1px solid #d6c5a9;
+            border-radius: 7px;
+        }
+
+        .timeline-box h3 {
+            color: #754a24;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #211811;
+            color: #cdbda7;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        footer strong {
+            color: #dfb66f;
+        }
+
+        /* DARK MODE */
+        body.dark {
+            background: #17130f;
+            color: #eadfce;
+        }
+
+        body.dark .article,
+        body.dark .timeline-box,
+        body.dark .search-area input,
+        body.dark .search-area select {
+            background: #261e17;
+            color: #eadfce;
+            border-color: #594832;
+        }
+
+        body.dark .article h3,
+        body.dark .section-title h2 {
+            color: #e0b978;
+        }
+
+        body.dark .article p,
+        body.dark .section-title p {
+            color: #c6b7a3;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 750px) {
+
+            .header-content {
+                flex-direction: column;
+            }
+
+            nav a {
+                margin: 0 7px;
+                font-size: 14px;
+            }
+
+            .search-area {
+                flex-direction: column;
+            }
+
+            .timeline::before {
+                left: 10px;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(even),
+            .timeline-item:nth-child(odd) {
+                width: 100%;
+                left: 0;
+                text-align: left;
+                padding-left: 35px;
+                padding-right: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-content">
+        <div class="logo">
+            CRONICI <span>ISTORICE</span>
+        </div>
+
+        <nav>
+            <a href="#acasa">Acasă</a>
+            <a href="#articole">Articole</a>
+            <a href="#cronologie">Cronologie</a>
+            <a href="#autor">Autor</a>
+            <button class="btn" onclick="toggleDarkMode()">☾</button>
+        </nav>
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="acasa">
+    <div class="hero-content">
+        <div class="author">BLOG ISTORIC — RELATAT DE PAVAL STEFAN</div>
+
+        <h1>O lume uitată nu trebuie să dispară</h1>
+
+        <p>
+            Povești, oameni și evenimente care au schimbat lumea,
+            privite prin ochii unei generații care încă mai caută
+            adevărul în paginile trecutului.
+        </p>
+
+        <a href="#articole" class="btn">Descoperă istoria</a>
+    </div>
+</section>
+
+<!-- ARTICOLE -->
+<section id="articole">
+
+    <div class="section-title">
+        <h2>Jurnalul istoriei</h2>
+        <p>Articole istorice selectate și relatate de Paval Stefan</p>
+    </div>
+
+    <div class="search-area">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Caută un articol..."
+            onkeyup="searchArticles()"
+        >
+
+        <select id="periodFilter" onchange="filterArticles()">
+            <option value="toate">Toate perioadele</option>
+            <option value="antichitate">Antichitate</option>
+            <option value="medieval">Evul Mediu</option>
+            <option value="modern">Epoca modernă</option>
+            <option value="contemporan">Epoca contemporană</option>
+        </select>
+    </div>
+
+    <div class="articles">
+
+        <article class="article" data-period="antichitate">
+
+            <div class="article-image"
+                 style="background-image:url('https://images.unsplash.com/photo-1605733513597-a8f8341084e6?auto=format&fit=crop&w=900&q=80')">
+            </div>
+
+            <div class="article-content">
+
+                <div class="article-date">
+                    ANTICHITATE
+                </div>
+
+                <h3>Roma – imperiul care a schimbat lumea</h3>
+
+                <p>
+                    Roma antică a construit unul dintre cele mai influente
+                    imperii ale lumii. De la drumuri și legi până la
+                    arhitectură și administrație, moștenirea romană
+                    continuă să existe și astăzi.
+                </p>
+
+                <a class="read-more"
+                   onclick="showArticle(
+                   'Roma – imperiul care a schimbat lumea',
+                   'Imperiul Roman a reprezentat una dintre cele mai importante civilizații ale Antichității. Puterea sa s-a extins pe teritorii vaste, iar cultura romană a influențat profund Europa și bazinul Mediteranei. Legile, drumurile, orașele și instituțiile sale au lăsat o moștenire care poate fi observată și în societatea modernă.'
+                   )">
+                    Citește mai mult →
+                </a>
+
+            </div>
+        </article>
+
+
+        <article class="article" data-period="medieval">
+
+            <div class="article-image"
+                 style="background-image:url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=900&q=80')">
+            </div>
+
+            <div class="article-content">
+
+                <div class="article-date">
+                    EVUL MEDIU
+                </div>
+
+                <h3>Evul Mediu și castelele Europei</h3>
+
+                <p>
+                    Castelele medievale nu erau doar locuințe pentru nobili.
+                    Ele reprezentau centre militare, administrative și
+                    simboluri ale puterii.
+                </p>
+
+                <a class="read-more"
+                   onclick="showArticle(
+                   'Evul Mediu și castelele Europei',
+                   'În Evul Mediu, castelele au devenit puncte importante pentru apărare și organizarea teritoriilor. Zidurile groase, turnurile și poziționarea strategică le transformau în adevărate fortărețe. În jurul lor s-au dezvoltat adesea așezări și centre comerciale.'
+                   )">
+                    Citește mai mult →
+                </a>
+
+            </div>
+        </article>
+
+
+        <article class="article" data-period="modern">
+
+            <div class="article-image"
+                 style="background-image:url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=900&q=80')">
+            </div>
+
+            <div class="article-content">
+
+                <div class="article-date">
+                    EPOCA MODERNĂ
+                </div>
+
+                <h3>Revoluția Industrială</h3>
+
+                <p>
+                    Începând din secolul al XVIII-lea, noile invenții și
+                    dezvoltarea fabricilor au schimbat radical economia
+                    și societatea.
+                </p>
+
+                <a class="read-more"
+                   onclick="showArticle(
+                   'Revoluția Industrială',
+                   'Revoluția Industrială a transformat modul în care oamenii munceau, produceau bunuri și locuiau. Mașinile și fabricile au dus la dezvoltarea orașelor și la apariția unor noi clase sociale. Transformările acestei perioade au contribuit la formarea lumii moderne.'
+                   )">
+                    Citește mai mult →
+                </a>
+
+            </div>
+        </article>
+
+
+        <article class="article" data-period="contemporan">
+
+            <div class="article-image"
+                 style="background-image:url('https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=900&q=80')">
+            </div>
+
+            <div class="article-content">
+
+                <div class="article-date">
+                    EPOCA CONTEMPORANĂ
+                </div>
+
+                <h3>Europa după Al Doilea Război Mondial</h3>
+
+                <p>
+                    După 1945, Europa a intrat într-o perioadă de reconstrucție
+                    și transformări politice profunde.
+                </p>
+
+                <a class="read-more"
+                   onclick="showArticle(
+                   'Europa după Al Doilea Război Mondial',
+                   'După încheierea celui de-al Doilea Război Mondial, statele europene au început un amplu proces de reconstrucție. Continentul a fost împărțit în două mari sfere politice, iar rivalitatea dintre acestea a marcat următoarele decenii. În același timp, au apărut proiecte de cooperare care au contribuit ulterior la formarea Uniunii Europene.'
+                   )">
+                    Citește mai mult →
+                </a>
+
+            </div>
+        </article>
+
+    </div>
+</section>
+
+
+<!-- CITAT -->
+<section class="featured">
+
+    <div class="section-title">
+        <h2>Gândul săptămânii</h2>
+    </div>
+
+    <div class="featured-content">
+
+        <blockquote>
+            „Istoria nu este doar despre ceea ce s-a întâmplat.
+            Este despre oamenii care au trăit acele momente
+            și despre lecțiile pe care noi alegem să le păstrăm.”
+        </blockquote>
+
+        <p style="margin-top:20px;">
+            — Paval Stefan
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- CRONOLOGIE -->
+<section id="cronologie">
+
+    <div class="section-title">
+        <h2>O scurtă cronologie</h2>
+        <p>Câteva momente importante din istoria lumii</p>
+    </div>
+
+    <div class="timeline">
+
+        <div class="timeline-item">
+            <div class="timeline-box">
+                <h3>753 î.Hr.</h3>
+                <p>
+                    Data tradițională atribuită fondării Romei.
+                </p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-box">
+                <h3>476</h3>
+                <p>
+                    Căderea Imperiului Roman de Apus,
+                    considerată convențional începutul Evului Mediu.
+                </p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-box">
+                <h3>1492</h3>
+                <p>
+                    Expediția lui Cristofor Columb ajunge în Americi,
+                    un moment care schimbă istoria lumii.
+                </p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-box">
+                <h3>1789</h3>
+                <p>
+                    Începutul Revoluției Franceze și al unei perioade
+                    importante de transformări politice în Europa.
+                </p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-box">
+                <h3>1945</h3>
+                <p>
+                    Sfârșitul celui de-al Doilea Război Mondial
+                    și începutul unei noi ordini internaționale.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- DESPRE AUTOR -->
+<section id="autor">
+
+    <div class="section-title">
+        <h2>Despre autor</h2>
+    </div>
+
+    <div class="about">
+
+        <div class="about-avatar">
+            PS
+        </div>
+
+        <h2>Paval Stefan</h2>
+
+        <p style="margin-top:20px;">
+            Bine ai venit pe <strong>Cronici Istorice</strong>.
+            Acest blog este dedicat poveștilor din trecut, oamenilor
+            care au schimbat lumea și evenimentelor care au modelat
+            societatea în care trăim.
+        </p>
+
+        <p style="margin-top:15px;">
+            Scopul acestui proiect este de a transforma istoria într-o
+            poveste accesibilă, interesantă și ușor de urmărit.
+            Fiecare articol reprezintă o invitație de a privi trecutul
+            cu mai multă curiozitate.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <p>
+        © <span id="year"></span>
+        <strong>Cronici Istorice</strong> —
+        Blog relatat de Paval Stefan
+    </p>
+
+    <p style="margin-top:8px;">
+        „Trecutul explică prezentul.”
+    </p>
+
+</footer>
+
+
+<!-- MODAL ARTICOL -->
+<div id="articleModal"
+     style="
+        display:none;
+        position:fixed;
+        z-index:2000;
+        inset:0;
+        background:rgba(0,0,0,0.75);
+        align-items:center;
+        justify-content:center;
+        padding:20px;
+     ">
+
+    <div style="
+        background:#fffaf2;
+        color:#2c241c;
+        max-width:750px;
+        max-height:85vh;
+        overflow:auto;
+        padding:40px;
+        border-radius:8px;
+        position:relative;
+        box-shadow:0 20px 60px rgba(0,0,0,0.4);
+     ">
+
+        <button
+            onclick="closeArticle()"
+            style="
+                position:absolute;
+                right:15px;
+                top:10px;
+                border:none;
+                background:none;
+                font-size:30px;
+                cursor:pointer;
+                color:#6d4b2b;
+            ">
+            ×
+        </button>
+
+        <h2 id="modalTitle"
+            style="color:#68431f; margin-bottom:20px;">
+        </h2>
+
+        <p id="modalText"></p>
+
+        <p style="
+            margin-top:25px;
+            color:#93652f;
+            font-weight:bold;
+        ">
+            Relatat de Paval Stefan
+        </p>
+
+    </div>
+</div>
+
+
+<script>
+
+    /* ANUL CURENT */
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
+
+
+    /* MOD DARK */
+    function toggleDarkMode() {
+        document.body.classList.toggle("dark");
+
+        localStorage.setItem(
+            "darkMode",
+            document.body.classList.contains("dark")
+        );
+    }
+
+
+    /* PĂSTREAZĂ MODUL ÎNTUNECAT */
+    if (localStorage.getItem("darkMode") === "true") {
+        document.body.classList.add("dark");
+    }
+
+
+    /* CĂUTARE */
+    function searchArticles() {
+
+        const search =
+            document
+                .getElementById("searchInput")
+                .value
+                .toLowerCase();
+
+        const articles =
+            document.querySelectorAll(".article");
+
+        articles.forEach(article => {
+
+            const text =
+                article.innerText.toLowerCase();
+
+            article.style.display =
+                text.includes(search)
+                    ? "block"
+                    : "none";
+        });
+    }
+
+
+    /* FILTRARE */
+    function filterArticles() {
+
+        const filter =
+            document.getElementById("periodFilter").value;
+
+        const articles =
+            document.querySelectorAll(".article");
+
+        articles.forEach(article => {
+
+            const period =
+                article.dataset.period;
+
+            if (filter === "toate" || period === filter) {
+                article.style.display = "block";
+            } else {
+                article.style.display = "none";
+            }
+
+        });
+    }
+
+
+    /* MODAL */
+    function showArticle(title, text) {
+
+        document.getElementById("modalTitle")
+            .textContent = title;
+
+        document.getElementById("modalText")
+            .textContent = text;
+
+        document.getElementById("articleModal")
+            .style.display = "flex";
+
+        document.body.style.overflow = "hidden";
+    }
+
+
+    function closeArticle() {
+
+        document.getElementById("articleModal")
+            .style.display = "none";
+
+        document.body.style.overflow = "auto";
+    }
+
+
+    /* ÎNCHIDERE CU ESC */
+    document.addEventListener("keydown", function(event) {
+
+        if (event.key === "Escape") {
+            closeArticle();
+        }
+
+    });
+
+
+    /* ÎNCHIDERE DACĂ SE APASĂ ÎN AFARA MODALULUI */
+    document.getElementById("articleModal")
+        .addEventListener("click", function(event) {
+
+            if (event.target === this) {
+                closeArticle();
+            }
+
+        });
+
+</script>
+
+</body>
+</html>
